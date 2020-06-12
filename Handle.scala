@@ -13,18 +13,18 @@ import org.apache.flink.streaming.util.serialization.JSONKeyValueDeserialization
 import org.apache.flink.util.Collector
 
 class Handle {
-  val accessKey = "C277DF0D97920BA6C4B3"
-  val secretKey = "W0Y5NkM1MDhBN0Y1NDE2N0NFNDNGMDNGOUYyQUVBRUQzNTkyOTU2RUZd"
+  val accessKey = ""
+  val secretKey = ""
   //s3地址
   val endpoint = "scuts3.depts.bingosoft.net:29999"
   //上传到的桶
-  val bucket = "yuxuxu"
+  val bucket = ""
   //上传文件的路径前缀
-  val keyPrefix = "work/"
+  val keyPrefix = ""
   //上传数据间隔 单位毫秒
   val period = 5000
   //输入的kafka主题名称
-  val inputTopic = "dataflow_1"
+  val inputTopic = "dataflow_9"
   //kafka地址
   val bootstrapServers = "bigdata35.depts.bingosoft.net:29035,bigdata36.depts.bingosoft.net:29036,bigdata37.depts.bingosoft.net:29037"
 
@@ -43,12 +43,13 @@ class Handle {
     kafkaConsumer.setCommitOffsetsOnCheckpoints(true)
     val inputKafkaStream = env.addSource(kafkaConsumer)
      inputKafkaStream.map(x=>(x.get("value").get("destination").asText, x.get("value").toString))
-      .keyBy(_._1).timeWindow(Time.seconds(10))
+      .keyBy(_._1).
+       timeWindow(Time.seconds(15))
        .process(new ProcessWindowFunction[(String, String), String, String, TimeWindow] {
        override def process(key: String, context: Context, elements: Iterable[(String, String)], out: Collector[String]): Unit = {
          var result = ""
-         for(e <- elements){
-           result += e._2 + "\n"
+         for(m<- elements){
+           result += m._2 + "\n"
          }
          out.collect(result)
        }

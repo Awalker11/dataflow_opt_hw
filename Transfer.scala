@@ -8,15 +8,15 @@ import org.nlpcn.commons.lang.util.IOUtil
 
 class Transfer {
   //s3参数
-  val accessKey = "C277DF0D97920BA6C4B3"
-  val secretKey = "W0Y5NkM1MDhBN0Y1NDE2N0NFNDNGMDNGOUYyQUVBRUQzNTkyOTU2RUZd"
+  val accessKey = ""
+  val secretKey = ""
   val endpoint = "scuts3.depts.bingosoft.net:29999"
-  val bucket = "yuxuxu"
+  val bucket = ""
   //要读取的文件
   val key = "daas.txt"
 
   //kafka参数
-  val topic = "dataflow_1"
+  val topic = "dataflow_9"
   val bootstrapServers = "bigdata35.depts.bingosoft.net:29035,bigdata36.depts.bingosoft.net:29036,bigdata37.depts.bingosoft.net:29037"
 
 
